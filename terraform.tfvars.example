@@ -1,0 +1,49 @@
+#	terraform.tfvars
+
+# Token to authenticate to Digital Ocean API
+digitalocean_token = "dop_v1_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# CSV file with the DNS records, default name is "records.csv"
+# See the records.csv.example file
+records_csv = "payload.csv"
+
+# Resources for the "plain" domain name have the name = "@"
+# type : NS, A, AAAA, CNAME, MX, TXT
+# This module does not support SRV or CAA resources
+# - CNAME data needs to end with a dot
+# - MX requires a priority argument
+records_list = {
+  "example.local" = [
+    {
+      name = "@"
+      type = "A"
+      data = "127.0.0.1"
+      ttl  = 60
+    },
+    {
+      name = "@"
+      type = "AAAA"
+      data = "::1"
+      ttl  = 60
+    },
+    {
+      name = "www"
+      type = "CNAME"
+      data = "example.local."
+      ttl  = 60
+    },
+    {
+      name     = "@"
+      type     = "MX"
+      data     = "example.local."
+      ttl      = 60
+      priority = 1
+    },
+    {
+      name = "@"
+      type = "TXT"
+      data = "Insert coin"
+      ttl  = 60
+    },
+  ],
+}

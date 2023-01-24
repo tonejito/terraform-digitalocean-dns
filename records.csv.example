@@ -1,0 +1,6 @@
+domain,name,type,ttl,data,priority
+example.local,@,A,60,127.0.0.1,0
+example.local,@,AAAA,60,::1,0
+example.local,mx,CNAME,60,localhost.local.,0
+example.local,@,MX,60,mx.example.local.,1
+example.local,@,TXT,60,Shalalalala,0

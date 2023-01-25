@@ -10,7 +10,7 @@ locals {
         data   = element["data"]
         ttl    = element["ttl"]
         # priority is set only if type is 'MX'
-        priority = element["type"] == "MX" ? element["priority"] : null
+        priority = element["type"] == "MX" ? element["priority"] : 0
       }
     ]
   ])

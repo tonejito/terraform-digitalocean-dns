@@ -7,7 +7,7 @@ resource "digitalocean_domain" "domains" {
 
 resource "digitalocean_record" "records" {
   for_each = {
-    for item in local.records : md5("${item.type}:${item.name}.${item.domain}:${item.ttl}:${item.priority}:${item.data}") => item
+    for item in local.records : md5("${item.type}:${item.name}.${item.domain}:${item.ttl}:${item.data}") => item
   }
 
   domain   = each.value.domain

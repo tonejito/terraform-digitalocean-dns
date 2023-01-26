@@ -7,7 +7,7 @@
 Create DNS zones and records on [Digital Ocean DNS][digitalocean-dns].
 
 - **Author**: Andrés Hernández (`tonejito`)
-- **Version**: 1.0
+- **Version**: 0.2
 
 ## Module Sources
 
@@ -15,7 +15,7 @@ Include this module in another terraform implementation
 
 ```
 module "digitalocean-dns" {
-  source = "git::https://github.com/tonejito/terraform-digitalocean-dns.git"
+  source = "git::https://github.com/tonejito/terraform-digitalocean-dns.git?ref=main"
 }
 ```
 
@@ -31,16 +31,18 @@ You need to create a [_Personal Access Token_ on the Digital Ocean control panel
 
 Set the variables in the `terraform.tfvars` file (see the `terraform.tfvars.example` file for more info)
 
-- Digital Ocean API authentication token
+- Digital Ocean API authentication token. Default _not defined_.
 
 ```
 digitalocean_token = "dop_v1_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
-- Name of the CSV file with the DNS records, default name is "records.csv"
+- List of CSV files with the DNS records. Default `[]` (_empty_).
 
 ```
-records_csv = "payload.csv"
+digitalocean_records_csv = [
+    "records.csv",
+  ]
 ```
 
 - The structure of the `records.csv` file is the following (see the `records.csv.example` file for more info)
@@ -54,10 +56,10 @@ example.net,@,MX,60,example.com.,1
 example.net,@,TXT,60,Insert coin,0
 ```
 
-- List of DNS records
+- List of DNS records. Default `{}` (_empty_).
 
 ```
-records_list = {
+digitalocean_records_list = {
   "example.com" = [
     {
       name = "@"

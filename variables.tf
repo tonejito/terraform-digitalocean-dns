@@ -1,17 +1,18 @@
 #	variables.tf
 
 variable "digitalocean_token" {
-  type = string
+  description = "Digital Ocean API token"
+  type        = string
 }
 
 variable "records_list" {
-  description = "DNS records"
+  description = "DNS record specification"
   type        = map(list(map(string)))
   default     = {}
 }
 
 variable "records_csv" {
-  description = "CSV file with DNS records"
-  type        = string
-  default     = "records.csv"
+  description = "List of CSV files with DNS records"
+  type        = list(string)
+  default     = []
 }

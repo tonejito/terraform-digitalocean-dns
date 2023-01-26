@@ -2,10 +2,10 @@
 
 output "domains" {
   description = "Domains created"
-  value = digitalocean_domain.domains
+  value       = sort(distinct([for item in digitalocean_domain.domains : item.name]))
 }
 
 output "records" {
   description = "Records created"
-  value = digitalocean_record.records
+  value       = sort(distinct([for item in digitalocean_record.records : format("%s:%s:%s.%s", item.domain, item.type, item.name, item.domain)]))
 }

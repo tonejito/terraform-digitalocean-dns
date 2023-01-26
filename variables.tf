@@ -5,13 +5,13 @@ variable "digitalocean_token" {
   type        = string
 }
 
-variable "records_list" {
+variable "digitalocean_records_list" {
   description = "DNS record specification"
   type        = map(list(map(string)))
   default     = {}
 }
 
-variable "records_csv" {
+variable "digitalocean_records_csv" {
   description = "List of CSV files with DNS records"
   type        = list(string)
   default     = []

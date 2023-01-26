@@ -2,8 +2,8 @@
 
 locals {
   dotted_record_types = ["CNAME", "NS", "MX"]
-  records_list = flatten([
-    for domain, items in var.records_list : [
+  digitalocean_records_list = flatten([
+    for domain, items in var.digitalocean_records_list : [
       for element in items : {
         domain = domain
         name   = element["name"]
@@ -16,11 +16,11 @@ locals {
       }
     ]
   ])
-  domains_list = distinct([
-    for item in local.records_list : item["domain"]
+  digitalocean_domains_list = distinct([
+    for item in local.digitalocean_records_list : item["domain"]
   ])
-  records_csv = flatten([
-    for input_file in var.records_csv : [
+  digitalocean_records_csv = flatten([
+    for input_file in var.digitalocean_records_csv : [
       for element in csvdecode(file(input_file)) : {
         domain = element["domain"]
         name   = element["name"]
@@ -33,9 +33,9 @@ locals {
       }
     ]
   ])
-  domains_csv = distinct([
-    for item in local.records_csv : item["domain"]
+  digitalocean_domains_csv = distinct([
+    for item in local.digitalocean_records_csv : item["domain"]
   ])
-  records = flatten(distinct([local.records_list, local.records_csv]))
-  domains = flatten(distinct([local.domains_list, local.domains_csv]))
+  digitalocean_records = flatten(distinct([local.digitalocean_records_list, local.digitalocean_records_csv]))
+  digitalocean_domains = flatten(distinct([local.digitalocean_domains_list, local.digitalocean_domains_csv]))
 }

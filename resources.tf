@@ -1,13 +1,13 @@
 #	resources.tf
 
 resource "digitalocean_domain" "domains" {
-  for_each = toset(local.domains)
+  for_each = toset(local.digitalocean_domains)
   name     = each.value
 }
 
 resource "digitalocean_record" "records" {
   for_each = {
-    for item in local.records : md5("${item.type}:${item.name}.${item.domain}:${item.ttl}:${item.data}") => item
+    for item in local.digitalocean_records : md5("${item.type}:${item.name}.${item.domain}:${item.ttl}:${item.data}") => item
   }
 
   domain   = each.value.domain

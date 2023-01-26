@@ -6,6 +6,8 @@ resource "digitalocean_domain" "domains" {
 }
 
 resource "digitalocean_record" "records" {
+  # Apply a hash to the item content to get a unique identifier for each record
+  # this allow multiple records to exist with the same name
   for_each = {
     for item in local.digitalocean_records : md5("${item.type}:${item.name}.${item.domain}:${item.ttl}:${item.data}") => item
   }
